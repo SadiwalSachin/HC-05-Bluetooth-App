@@ -7,7 +7,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to HC-05 Bluetooth App</Text>
+      <Text style={styles.title}>Welcome to NETRAA</Text>
       <Text style={styles.subtitle}>Choose an option below to continue</Text>
 
       {/* Buttons */}

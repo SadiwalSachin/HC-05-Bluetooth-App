@@ -3,7 +3,6 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { TouchableOpacity, Text } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import HomeScreen from "./screens/HomeScreen";
 import SendPlainTextScreen from "./screens/SendTextScreen";
 import SendVoiceDataScreen from "./screens/SendVoiceData";
@@ -11,6 +10,7 @@ import SendPDFScreen from "./screens/SendPDFData";
 import TeachersModuleScreen from "./screens/TeachersModuleScreen";
 import BluetoothScreen from "./screens/BlueetoothScreen";
 import {BluetoothProvider} from "./context/BluetoothContext"
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +29,7 @@ export default function App() {
               onPress={() => navigation.navigate("Settings")}
               style={{ marginRight: 10 }}
             >
-              {/* <Ionicons name="settings-outline" size={24} color="#fff" /> */}
+              {/* <Icon name="settings-outline" size={24} color="#fff" /> */}
               <Text style={{color:"white"}}>
                 Settings
               </Text>
@@ -40,7 +40,7 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: "Bluetooth HC-05" }}
+          options={{ title: "NETRAA" }}
         />
 
         <Stack.Screen

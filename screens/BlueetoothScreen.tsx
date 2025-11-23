@@ -10,12 +10,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { PermissionsAndroid } from 'react-native';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
 import { BluetoothContext } from '../context/BluetoothContext';
+import NetraaLoader from '../components/Loader';
 
 export default function BluetoothScreen() {
 
   const { connectedDevice, setConnectedDevice } = useContext(BluetoothContext);
   const [devices, setDevices] = useState([]);
-  const [loding,setLoading] = useState(false)
+  const [loading,setLoading] = useState(false)
   const [error,setError] = useState()
 
    async function listPairedDevices (){
@@ -46,6 +47,11 @@ export default function BluetoothScreen() {
 
   async function connectToDevice(device) {
     try {
+
+      if(connectedDevice){
+        return
+      }
+
       setLoading(true)
       console.log("device came to connect",device);
       
@@ -71,28 +77,13 @@ export default function BluetoothScreen() {
   console.log('i am on bluettoth screen');
   console.log("selected Device",connectedDevice);
   
+  if(loading){
+    return <NetraaLoader/>
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Connected Bluetooth Devices</Text>
-
-      {/* <FlatList
-        data={dummyDevices}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={{ paddingTop: 10 }}
-        renderItem={({ item }) => (
-          <TouchableOpacity style={styles.deviceCard}>
-            <Ionicons name="bluetooth" size={28} color="#0A84FF" />
-
-            <View style={{ flex: 1, marginLeft: 12 }}>
-              <Text style={styles.deviceName}>{item.name}</Text>
-              <Text style={styles.connectedText}>Connected</Text>
-            </View>
-
-            <Ionicons name="chevron-forward" size={24} color="#888" />
-          </TouchableOpacity>
-        )}
-      /> */}
 
          <FlatList
         data={devices}

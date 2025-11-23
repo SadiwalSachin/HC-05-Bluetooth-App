@@ -1,5 +1,6 @@
-import React from "react";
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useContext } from "react";
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { BluetoothContext } from "../context/BluetoothContext";
 
 const alphabets = [
   { letter: "A", braille: "⠁" },
@@ -31,6 +32,26 @@ const alphabets = [
 ];
 
 export default function TeachersModuleScreen() {
+
+  const {connectedDevice} = useContext(BluetoothContext)
+
+    const handleTeach = async (textMessage:string) => {
+      try {
+        if (!connectedDevice) {
+          Alert.alert("No device connected");
+          return;
+        }
+        if (!textMessage.trim()) return;
+  
+        await connectedDevice.write(textMessage + "\n");
+  
+        console.log("Sent:", textMessage);
+  
+      } catch (error) {
+        console.log("Sending failed:", error);
+      }
+    };
+
   return (
     <ScrollView style={styles.container}>
 
@@ -50,7 +71,9 @@ export default function TeachersModuleScreen() {
           <Text style={styles.brailleText}>{item.braille}</Text>
 
           {/* Teach Button */}
-          <TouchableOpacity style={styles.teachButton}>
+          <TouchableOpacity 
+          onPress={()=>handleTeach(item.letter)}
+          style={styles.teachButton}>
             <Text style={styles.teachButtonText}>Teach</Text>
           </TouchableOpacity>
         </View>
