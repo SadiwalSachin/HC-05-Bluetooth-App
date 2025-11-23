@@ -1,13 +1,27 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useContext, useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import RNBluetoothClassic from 'react-native-bluetooth-classic';
+import { BluetoothContext } from "../context/BluetoothContext";
 
 export default function SendPlainTextScreen() {
 
+  const {connectedDevice} = useContext(BluetoothContext)
   const [textMessage, setTextMessage] = useState("");
 
-  const handleSend = () => {
-    // Later you will call HC05 send function here
-    console.log("Sending:", textMessage);
+  console.log("connected device in plan text",connectedDevice);
+  
+
+  const handleSend = async () => {
+  try {
+      if (!connectedDevice) {
+      Alert.alert("No device connected");
+      return;
+    }
+    await connectedDevice.write(textMessage + "\n");
+    console.log("Data sent:", textMessage);
+  } catch (error) {
+    console.log("Sending failed:", error);
+  }
   };
 
   return (
@@ -15,6 +29,8 @@ export default function SendPlainTextScreen() {
       <Text style={styles.title}>Send Plain Text</Text>
 
       <Text style={styles.label}>Type your message:</Text>
+
+      <Text>Connected to: {connectedDevice?.name}</Text>
 
       <TextInput
         value={textMessage}

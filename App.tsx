@@ -9,11 +9,15 @@ import SendPlainTextScreen from "./screens/SendTextScreen";
 import SendVoiceDataScreen from "./screens/SendVoiceData";
 import SendPDFScreen from "./screens/SendPDFData";
 import TeachersModuleScreen from "./screens/TeachersModuleScreen";
+import BluetoothScreen from "./screens/BlueetoothScreen";
+import {BluetoothProvider} from "./context/BluetoothContext"
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
+    <BluetoothProvider>
+
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={({ navigation }) => ({
@@ -25,7 +29,10 @@ export default function App() {
               onPress={() => navigation.navigate("Settings")}
               style={{ marginRight: 10 }}
             >
-              <Ionicons name="settings-outline" size={24} color="#fff" />
+              {/* <Ionicons name="settings-outline" size={24} color="#fff" /> */}
+              <Text style={{color:"white"}}>
+                Settings
+              </Text>
             </TouchableOpacity>
           ),
         })}
@@ -38,7 +45,7 @@ export default function App() {
 
         <Stack.Screen
           name="Settings"
-          component={() => null}
+          component={BluetoothScreen}
           options={{ title: "Settings" }}
         />
 
@@ -67,5 +74,7 @@ export default function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </BluetoothProvider>
+
   );
 }
