@@ -29,10 +29,7 @@ export default function App() {
               onPress={() => navigation.navigate("Settings")}
               style={{ marginRight: 10 }}
             >
-              {/* <Icon name="settings-outline" size={24} color="#fff" /> */}
-              <Text style={{color:"white"}}>
-                Settings
-              </Text>
+              <Icon name="settings-outline" size={24} color="#fff" />
             </TouchableOpacity>
           ),
         })}

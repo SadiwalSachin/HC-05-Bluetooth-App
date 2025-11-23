@@ -88,11 +88,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#EBF2FF", // very light blue gradient look
     paddingHorizontal: 20,
-    paddingVertical: 16,
+    paddingVertical: 10,
   },
 
   headerRow: {
-    marginBottom: 18,
+    marginBottom: 10,
   },
 
   headerText: {
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     borderColor: "#bfdbfe",
     borderRadius: 18,
     padding: 18,
-    marginBottom: 14,
+    marginBottom: 5,
     elevation: 4,
     shadowColor: "#9dbafc",
   },
@@ -138,9 +138,8 @@ const styles = StyleSheet.create({
   },
 
   teachButton: {
-    backgroundColor: "#1d4ed8",
-    marginTop: 18,
-    paddingVertical: 14,
+    backgroundColor: "#0A84FF",
+    paddingVertical: 10,
     borderRadius: 14,
     alignItems: "center",
   },
